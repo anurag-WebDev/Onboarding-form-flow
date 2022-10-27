@@ -5,6 +5,7 @@ import RegistrationStepper from "./components/RegistrationStepper";
 function App() {
   const [fullName, setFullName] = useState([]);
   const [displayName, setDisplayName] = useState([]);
+  const [isInputValid, setIsInputValid] = useState(false);
 
   return (
     <div
@@ -20,6 +21,8 @@ function App() {
         setFullName={setFullName}
         displayName={displayName}
         setDisplayName={setDisplayName}
+        isInputValid={isInputValid}
+        setIsInputValid={setIsInputValid}
       />
     </div>
   );

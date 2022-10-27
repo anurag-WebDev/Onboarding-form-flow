@@ -1,9 +1,27 @@
-import React from "react";
-import { Grid, Stack, TextField, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Stack, TextField, Typography } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Box } from "@mui/material";
 
-const WorkSpaceDetails = () => {
+const WorkSpaceDetails = ({ isInputValid, setIsInputValid }) => {
+  const [workSpaceName, setWorkSpaceName] = useState([]);
+
+  useEffect(() => {
+    if (workSpaceName.length < 3) {
+      setIsInputValid(false);
+    } else {
+      setIsInputValid(true);
+    }
+  }, [workSpaceName]);
+
+  const handleChange = (e) => {
+    if (e.target.id === "workSpaceName") {
+      setWorkSpaceName(e.target.value);
+      // console.log(fullName);
+      return;
+    }
+  };
+
   let container = (
     <Box>
       <Stack spacing={2} direction="row" sx={{ paddingTop: "2rem" }}>
@@ -26,6 +44,7 @@ const WorkSpaceDetails = () => {
               placeholder="Enter Workspace Name"
               required
               fullWidth
+              onChange={(e) => handleChange(e)}
             ></TextField>
             <Typography>Workspace URL(optional)</Typography>
             <TextField
@@ -34,7 +53,6 @@ const WorkSpaceDetails = () => {
               variant="outlined"
               title="workspaceUrl"
               name="workspaceUrl"
-              placeholder="Example"
               fullWidth
               InputProps={{
                 startAdornment: (

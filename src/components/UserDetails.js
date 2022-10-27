@@ -1,13 +1,23 @@
 import { Grid, Stack, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 
 const UserDetails = ({
   fullName,
   setFullName,
   displayName,
   setDisplayName,
+  isInputValid,
+  setIsInputValid,
 }) => {
+  useEffect(() => {
+    if (fullName.length < 3) {
+      setIsInputValid(false);
+    } else {
+      setIsInputValid(true);
+    }
+  }, [fullName, displayName]);
+
   const handleChange = (e) => {
     if (e.target.id === "fullName") {
       setFullName(e.target.value);

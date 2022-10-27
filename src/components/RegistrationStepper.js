@@ -3,6 +3,7 @@ import { Box, Card, Button, Grid } from "@mui/material";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
+import { useSnackbar } from "notistack";
 import PageView from "./PageView";
 import Header from "./Header";
 
@@ -11,12 +12,26 @@ const RegistrationStepper = ({
   setFullName,
   displayName,
   setDisplayName,
+  isInputValid,
+  setIsInputValid,
 }) => {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   const steps = [1, 2, 3, 4];
   const [activeStep, setActiveStep] = React.useState(0);
   const [page, setPage] = React.useState(0);
 
-  // console.log(nameDetails);
+  const action = (snackbarId) => {
+    return (
+      <Button
+        onClick={() => {
+          closeSnackbar(snackbarId);
+        }}
+      >
+        Dismiss
+      </Button>
+    );
+  };
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
@@ -24,8 +39,29 @@ const RegistrationStepper = ({
       setPage(0);
       return;
     }
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setPage((prevPage) => prevPage + 1);
+
+    if (isInputValid) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setPage((prevPage) => prevPage + 1);
+    } else {
+      if (page === 0) {
+        enqueueSnackbar(
+          "fullName and displayName are required fields and should have minimum 3 characters",
+          {
+            action: (snackbarId) => action(snackbarId),
+            variant: "error",
+          }
+        );
+      } else if (page === 1) {
+        enqueueSnackbar(
+          "Workspace name is required field and should have minimum 3 characters",
+          {
+            action: (snackbarId) => action(snackbarId),
+            variant: "error",
+          }
+        );
+      }
+    }
   };
 
   return (
@@ -60,6 +96,8 @@ const RegistrationStepper = ({
                   setFullName={setFullName}
                   displayName={displayName}
                   setDisplayName={setDisplayName}
+                  isInputValid={isInputValid}
+                  setIsInputValid={setIsInputValid}
                 />
               </Grid>
             </Grid>

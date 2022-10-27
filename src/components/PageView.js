@@ -11,6 +11,8 @@ const PageView = ({
   setFullName,
   displayName,
   setDisplayName,
+  isInputValid,
+  setIsInputValid,
 }) => {
   let pageToDisplay;
   if (page === 0) {
@@ -20,10 +22,17 @@ const PageView = ({
         setFullName={setFullName}
         displayName={displayName}
         setDisplayName={setDisplayName}
+        isInputValid={isInputValid}
+        setIsInputValid={setIsInputValid}
       />
     );
   } else if (page === 1) {
-    pageToDisplay = <WorkSpaceDetails displayName={displayName} />;
+    pageToDisplay = (
+      <WorkSpaceDetails
+        isInputValid={isInputValid}
+        setIsInputValid={setIsInputValid}
+      />
+    );
   } else if (page === 2) {
     pageToDisplay = <WorkSpaceSetup />;
   } else {
