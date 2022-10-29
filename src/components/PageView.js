@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/material";
 import UserDetails from "./UserDetails";
 import WorkSpaceDetails from "./WorkSpaceDetails";
 import WorkSpaceSetup from "./WorkSpaceSetup";
@@ -34,7 +33,12 @@ const PageView = ({
       />
     );
   } else if (page === 2) {
-    pageToDisplay = <WorkSpaceSetup />;
+    pageToDisplay = (
+      <WorkSpaceSetup
+        isInputValid={isInputValid}
+        setIsInputValid={setIsInputValid}
+      />
+    );
   } else {
     pageToDisplay = <OnboardingComplete displayName={displayName} />;
   }

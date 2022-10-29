@@ -1,4 +1,4 @@
-import { Grid, Stack, TextField, Typography } from "@mui/material";
+import { Stack, TextField, Typography, Grid } from "@mui/material";
 import { Box } from "@mui/material";
 import React, { useEffect } from "react";
 
@@ -16,6 +16,7 @@ const UserDetails = ({
     } else {
       setIsInputValid(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fullName, displayName]);
 
   const handleChange = (e) => {
@@ -32,47 +33,49 @@ const UserDetails = ({
 
   let container = (
     <Box>
-      {/* <Grid container spacing={2}> */}
-      {/* <Grid item> */}
-      <Stack spacing={2} direction="row" sx={{ paddingTop: "3rem" }}>
-        <Box>
-          <Typography variant="h5">Welcome! First Things First...</Typography>
-          <Typography variant="subtitle1" sx={{ textAlign: "center" }}>
-            You can always change them later
-          </Typography>
-          <Box sx={{ paddingTop: "2rem" }}>
-            <Typography>Full Name</Typography>
-            <TextField
-              id="fullName"
-              label="Steve Jobs"
-              variant="outlined"
-              title="fullName"
-              name="fullName"
-              placeholder="Enter Full Name"
-              required
-              value={fullName}
-              onChange={(e) => handleChange(e)}
-              fullWidth
-            ></TextField>
-            <Typography>Display Name</Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Stack spacing={2} direction="row" sx={{ paddingTop: "3rem" }}>
+            <Box>
+              <Typography variant="h5">
+                Welcome! First Things First...
+              </Typography>
+              <Typography variant="subtitle1" sx={{ textAlign: "center" }}>
+                You can always change them later
+              </Typography>
+              <Box sx={{ paddingTop: "2rem" }}>
+                <Typography>Full Name</Typography>
+                <TextField
+                  id="fullName"
+                  label="Steve Jobs"
+                  variant="outlined"
+                  title="fullName"
+                  name="fullName"
+                  placeholder="Enter Full Name"
+                  required
+                  value={fullName}
+                  onChange={(e) => handleChange(e)}
+                  fullWidth
+                ></TextField>
+                <Typography>Display Name</Typography>
 
-            <TextField
-              id="displayName"
-              label="Steve"
-              variant="outlined"
-              title="displayName"
-              name="displayName"
-              placeholder="Enter Display Name"
-              required
-              fullWidth
-              value={displayName}
-              onChange={(e) => handleChange(e)}
-            ></TextField>
-          </Box>
-        </Box>
-      </Stack>
-      {/* </Grid> */}
-      {/* </Grid> */}
+                <TextField
+                  id="displayName"
+                  label="Steve"
+                  variant="outlined"
+                  title="displayName"
+                  name="displayName"
+                  placeholder="Enter Display Name"
+                  required
+                  fullWidth
+                  value={displayName}
+                  onChange={(e) => handleChange(e)}
+                ></TextField>
+              </Box>
+            </Box>
+          </Stack>
+        </Grid>
+      </Grid>
     </Box>
   );
 

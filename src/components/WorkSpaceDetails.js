@@ -12,6 +12,7 @@ const WorkSpaceDetails = ({ isInputValid, setIsInputValid }) => {
     } else {
       setIsInputValid(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workSpaceName]);
 
   const handleChange = (e) => {

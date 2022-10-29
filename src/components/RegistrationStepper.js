@@ -1,11 +1,9 @@
 import React from "react";
-import { Box, Card, Button, Grid } from "@mui/material";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
+import { Box, Button, Grid } from "@mui/material";
 import { useSnackbar } from "notistack";
 import PageView from "./PageView";
 import Header from "./Header";
+import GenerateStepper from "./GenerateStepper";
 
 const RegistrationStepper = ({
   fullName,
@@ -60,6 +58,11 @@ const RegistrationStepper = ({
             variant: "error",
           }
         );
+      } else if (page === 2) {
+        enqueueSnackbar("Please select Work Space Mode", {
+          action: (snackbarId) => action(snackbarId),
+          variant: "error",
+        });
       }
     }
   };
@@ -71,25 +74,14 @@ const RegistrationStepper = ({
           <Box sx={{ width: "100%" }}>
             <Header />
 
-            <Stepper
-              activeStep={activeStep}
-              alternativeLabel
-              sx={{
-                activeColor: "purple",
-              }}
-            >
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel></StepLabel>
-                </Step>
-              ))}
-            </Stepper>
+            <GenerateStepper steps={steps} activeStep={activeStep} />
+
             <Grid
               container
               spacing={2}
               sx={{ justifyContent: "center", padding: "1rem" }}
             >
-              <Grid item>
+              <Grid item xs={12}>
                 <PageView
                   page={page}
                   fullName={fullName}
@@ -101,21 +93,24 @@ const RegistrationStepper = ({
                 />
               </Grid>
             </Grid>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Button
-                  variant="contained"
-                  size="large"
-                  onClick={() => handleNext()}
-                  sx={{ marginLeft: "16px" }}
-                  fullWidth
-                >
-                  {activeStep === steps.length - 1
-                    ? "Launch Eden"
-                    : "Create Workspace"}
-                </Button>
-              </Grid>
-            </Grid>
+            {/* <Grid container spacing={2}> */}
+            {/* <Grid item xs={12}> */}
+            <Button
+              variant="contained"
+              size="large"
+              onClick={() => handleNext()}
+              fullWidth
+              sx={{
+                marginLeft: "16px",
+                backgroundColor: "#6642e5",
+              }}
+            >
+              {activeStep === steps.length - 1
+                ? "Launch Eden"
+                : "Create Workspace"}
+            </Button>
+            {/* </Grid> */}
+            {/* </Grid> */}
           </Box>
         </Grid>
       </Grid>

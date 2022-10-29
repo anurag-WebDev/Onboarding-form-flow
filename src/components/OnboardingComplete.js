@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Stack, TextField, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
@@ -10,7 +10,12 @@ const OnboardingComplete = ({ displayName }) => {
         <Grid item>
           <Stack spacing={2} direction="row">
             <Box sx={{ textAlign: "center" }}>
-              <CheckCircleIcon fontSize="large" />
+              <CheckCircleIcon
+                fontSize="large"
+                sx={{
+                  color: "#6642e5",
+                }}
+              />
               <Box sx={{ paddingTop: "2rem" }}>
                 <Typography variant="h5">
                   Congratulations, {displayName}
